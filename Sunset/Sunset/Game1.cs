@@ -11,13 +11,50 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Sunset
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
+    public class Ball
+    {
+        public Texture2D ball;
+        public Vector2 ballPosition = Vector2.Zero;
+        public int verticalSpeed;
+        public int horizontalSpeed;
+        public float barY;
+        public float ballHeight;
+        public Ball()
+        {
+            verticalSpeed = 7;
+            horizontalSpeed = 7;
+        }
+        public void update()
+        {
+            ballPosition.X += horizontalSpeed;
+            ballPosition.Y += verticalSpeed;
+        }
+        public void hitWall()
+        {
+            horizontalSpeed *= -1;
+        }
+        public void hitBar()
+        {
+            ballPosition.Y = barY - 1 - ballHeight;
+            verticalSpeed *= -1;
+        }
+        public void setHeight(float bar, float ballH)
+        {
+            barY = bar;
+            ballHeight = ballH;
+        }
+    }
+
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        Texture2D bar;
+        Vector2 barPosition = Vector2.Zero;
+        int barSpeed = 7;
+
+        Ball ball1 = new Ball();
 
         public Game1()
         {
@@ -25,65 +62,58 @@ namespace Sunset
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            bar = Content.Load<Texture2D>("bar");
+            barPosition = new Vector2(graphics.GraphicsDevice.Viewport.Width/2 - bar.Width/2, graphics.GraphicsDevice.Viewport.Height - 20);
+
+            ball1.ball = Content.Load<Texture2D>("ball");
+            ball1.setHeight(barPosition.Y, ball1.ball.Height);
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            // TODO: Add your update logic here
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left) && barPosition.X >= 0)
+                barPosition.X -= barSpeed;
+            else if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right) && barPosition.X <= graphics.GraphicsDevice.Viewport.Width - bar.Width)
+                barPosition.X += barSpeed;
+
+            ball1.update();
+
+            if (ball1.ballPosition.X <= 0 || ball1.ballPosition.X + ball1.ball.Width >= graphics.GraphicsDevice.Viewport.Width)
+                ball1.hitWall();
+            if (ball1.ballPosition.Y + ball1.ball.Height >= barPosition.Y && ball1.ballPosition.Y + ball1.ball.Height <= graphics.GraphicsDevice.Viewport.Height 
+                    && ball1.ballPosition.X + ball1.ball.Width/2 >= barPosition.X && ball1.ballPosition.X + ball1.ball.Width/2 <= barPosition.X + bar.Width)
+                ball1.hitBar();
+ 
+            if (ball1.ballPosition.Y <= 0)
+                ball1.verticalSpeed *= -1;
 
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
+            spriteBatch.Draw(bar, barPosition, Color.White);
+            spriteBatch.Draw(ball1.ball, ball1.ballPosition, Color.White);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
