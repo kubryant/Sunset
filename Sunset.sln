@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.20827.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sunset", "Sunset\Sunset\Sunset.csproj", "{1C649F95-06A8-4932-9269-7DA319DECDAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sunset", "Sunset\Sunset\Sunset.csproj", "{75737372-FCCE-4BBA-A6E9-9299038E4A42}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "SunsetContent", "Sunset\SunsetContent\SunsetContent.contentproj", "{76AE27EF-D103-47AD-BAB6-2BFA9264E52C}"
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "SunsetContent", "Sunset\SunsetContent\SunsetContent.contentproj", "{DC0C4CCF-D20B-4F94-B0C8-0FC993C064C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,12 +13,12 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1C649F95-06A8-4932-9269-7DA319DECDAC}.Debug|x86.ActiveCfg = Debug|x86
-		{1C649F95-06A8-4932-9269-7DA319DECDAC}.Debug|x86.Build.0 = Debug|x86
-		{1C649F95-06A8-4932-9269-7DA319DECDAC}.Release|x86.ActiveCfg = Release|x86
-		{1C649F95-06A8-4932-9269-7DA319DECDAC}.Release|x86.Build.0 = Release|x86
-		{76AE27EF-D103-47AD-BAB6-2BFA9264E52C}.Debug|x86.ActiveCfg = Debug|x86
-		{76AE27EF-D103-47AD-BAB6-2BFA9264E52C}.Release|x86.ActiveCfg = Release|x86
+		{75737372-FCCE-4BBA-A6E9-9299038E4A42}.Debug|x86.ActiveCfg = Debug|x86
+		{75737372-FCCE-4BBA-A6E9-9299038E4A42}.Debug|x86.Build.0 = Debug|x86
+		{75737372-FCCE-4BBA-A6E9-9299038E4A42}.Release|x86.ActiveCfg = Release|x86
+		{75737372-FCCE-4BBA-A6E9-9299038E4A42}.Release|x86.Build.0 = Release|x86
+		{DC0C4CCF-D20B-4F94-B0C8-0FC993C064C4}.Debug|x86.ActiveCfg = Debug|x86
+		{DC0C4CCF-D20B-4F94-B0C8-0FC993C064C4}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
