@@ -23,8 +23,8 @@ namespace Sunset
         Random rnd = new Random();
         public Ball()
         {
-            verticalSpeed = 7;
-            horizontalSpeed = 7;
+            verticalSpeed = rnd.Next(6, 9);
+            horizontalSpeed = rnd.Next(6, 9);
         }
         public void update()
         {
